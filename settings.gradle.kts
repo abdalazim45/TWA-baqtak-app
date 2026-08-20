@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = ""
+rootProject.name = "Baqtak"
 include(":app")
  
