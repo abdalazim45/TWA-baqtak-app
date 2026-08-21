@@ -33,16 +33,22 @@
                 <data android:scheme="https" android:host="www.baqtak.com" />
             </intent-filter>
 
-            <!-- إعدادات الشاشة الترحيبية لتغطية فترة فحص كروم -->
+            <!-- إعدادات شاشة الترحيب الصحيحة للـ TWA -->
             <meta-data
                 android:name="android.support.customtabs.trusted.SPLASH_IMAGE_DRAWABLE"
                 android:resource="@drawable/splash" />
+
             <meta-data
                 android:name="android.support.customtabs.trusted.SPLASH_SCREEN_BACKGROUND_COLOR"
-                android:value="#FFFFFF" />
+                android:resource="@android:color/white" />
+
             <meta-data
                 android:name="android.support.customtabs.trusted.SPLASH_SCREEN_FADE_OUT_DURATION"
                 android:value="300" />
+
+            <meta-data
+                android:name="android.support.customtabs.trusted.FILE_PROVIDER_AUTHORITY"
+                android:value="${applicationId}.fileprovider" />
 
         </activity>
 
