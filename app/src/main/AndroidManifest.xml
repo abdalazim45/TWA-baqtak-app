@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Internet access is required for the TWA website -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -15,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimatedSplash.MySplash">
 
+        <!--
+            Main launcher activity.
+            IntroActivity is only responsible for starting the TWA.
+        -->
         <activity
             android:name=".IntroActivity"
             android:exported="true"
@@ -22,22 +25,12 @@
             android:excludeFromRecents="true"
             android:launchMode="singleTask">
 
-            <!-- App launcher -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!--
-                Digital Asset Links / App Links
-
-                IMPORTANT:
-                The TWA start_url is:
-                https://baqtak.com/
-
-                Therefore the verified host is:
-                baqtak.com
-            -->
+            <!-- Verified Baqtak domain -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -50,6 +43,70 @@
             </intent-filter>
 
         </activity>
+
+
+        <!--
+            TWA Launcher
+
+            This is the Android Browser Helper activity responsible
+            for the real TWA splash screen and the transition to Chrome.
+        -->
+        <activity
+            android:name="com.google.androidbrowserhelper.trusted.LauncherActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+
+            <!-- TWA Splash image -->
+            <meta-data
+                android:name="android.support.customtabs.trusted.SPLASH_IMAGE_DRAWABLE"
+                android:resource="@drawable/twa_splash" />
+
+            <!-- Splash background -->
+            <meta-data
+                android:name="android.support.customtabs.trusted.SPLASH_SCREEN_BACKGROUND_COLOR"
+                android:resource="@color/white" />
+
+            <!-- Smooth transition from splash to TWA -->
+            <meta-data
+                android:name="android.support.customtabs.trusted.SPLASH_SCREEN_FADE_OUT_DURATION"
+                android:value="300" />
+
+            <!-- FileProvider authority used by TWA Splash -->
+            <meta-data
+                android:name="android.support.customtabs.trusted.FILE_PROVIDER_AUTHORITY"
+                android:value="${applicationId}.fileprovider" />
+
+        </activity>
+
+
+        <!--
+            FileProvider required by Android Browser Helper
+            to transfer the TWA splash screen to Chrome.
+        -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+
+        </provider>
+
+
+        <!-- Required by Trusted Web Activity -->
+        <service
+            android:name="com.google.androidbrowserhelper.trusted.DelegationService"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.support.customtabs.trusted.TRUSTED_WEB_ACTIVITY_SERVICE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </service>
 
     </application>
 
