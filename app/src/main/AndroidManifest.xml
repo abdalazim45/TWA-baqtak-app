@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Internet access is required for the TWA website -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -21,17 +22,31 @@
             android:excludeFromRecents="true"
             android:launchMode="singleTask">
 
+            <!-- App launcher -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-                        <!-- This block will be completely replaced by generate.php -->
+            <!--
+                Digital Asset Links / App Links
+
+                IMPORTANT:
+                The TWA start_url is:
+                https://baqtak.com/
+
+                Therefore the verified host is:
+                baqtak.com
+            -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="www.baqtak.com" />
+
+                <data
+                    android:scheme="https"
+                    android:host="baqtak.com" />
             </intent-filter>
 
         </activity>
