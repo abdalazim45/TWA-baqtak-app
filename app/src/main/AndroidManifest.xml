@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -14,17 +15,48 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimatedSplash.MySplash">
 
-        <!--
-            Main launcher activity.
-            IntroActivity is only responsible for starting the TWA.
-        -->
+        <!-- TWA Launcher -->
         <activity
-            android:name=".IntroActivity"
-            android:exported="true"
-            android:noHistory="true"
-            android:excludeFromRecents="true"
-            android:launchMode="singleTask">
+            android:name="com.google.androidbrowserhelper.trusted.LauncherActivity"
+            android:label="@string/app_name"
+            android:exported="true">
 
+            <!-- Website -->
+            <meta-data
+                android:name="android.support.customtabs.trusted.DEFAULT_URL"
+                android:value="https://baqtak.com/" />
+
+            <!-- Full screen -->
+            <meta-data
+                android:name="android.support.customtabs.trusted.DISPLAY_MODE"
+                android:value="immersive" />
+
+            <!-- Portrait -->
+            <meta-data
+                android:name="android.support.customtabs.trusted.SCREEN_ORIENTATION"
+                android:value="portrait" />
+
+            <!-- TWA Splash -->
+            <meta-data
+                android:name="android.support.customtabs.trusted.SPLASH_IMAGE_DRAWABLE"
+                android:resource="@drawable/twa_splash" />
+
+            <!-- Splash background -->
+            <meta-data
+                android:name="android.support.customtabs.trusted.SPLASH_SCREEN_BACKGROUND_COLOR"
+                android:resource="@color/white" />
+
+            <!-- Fade out when website is ready -->
+            <meta-data
+                android:name="android.support.customtabs.trusted.SPLASH_SCREEN_FADE_OUT_DURATION"
+                android:value="300" />
+
+            <!-- FileProvider used by TWA Splash -->
+            <meta-data
+                android:name="android.support.customtabs.trusted.FILE_PROVIDER_AUTHORITY"
+                android:value="${applicationId}.fileprovider" />
+
+            <!-- Launcher -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -45,44 +77,7 @@
         </activity>
 
 
-        <!--
-            TWA Launcher
-
-            This is the Android Browser Helper activity responsible
-            for the real TWA splash screen and the transition to Chrome.
-        -->
-        <activity
-            android:name="com.google.androidbrowserhelper.trusted.LauncherActivity"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
-
-            <!-- TWA Splash image -->
-            <meta-data
-                android:name="android.support.customtabs.trusted.SPLASH_IMAGE_DRAWABLE"
-                android:resource="@drawable/twa_splash" />
-
-            <!-- Splash background -->
-            <meta-data
-                android:name="android.support.customtabs.trusted.SPLASH_SCREEN_BACKGROUND_COLOR"
-                android:resource="@color/white" />
-
-            <!-- Smooth transition from splash to TWA -->
-            <meta-data
-                android:name="android.support.customtabs.trusted.SPLASH_SCREEN_FADE_OUT_DURATION"
-                android:value="300" />
-
-            <!-- FileProvider authority used by TWA Splash -->
-            <meta-data
-                android:name="android.support.customtabs.trusted.FILE_PROVIDER_AUTHORITY"
-                android:value="${applicationId}.fileprovider" />
-
-        </activity>
-
-
-        <!--
-            FileProvider required by Android Browser Helper
-            to transfer the TWA splash screen to Chrome.
-        -->
+        <!-- FileProvider required for TWA Splash -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -96,10 +91,11 @@
         </provider>
 
 
-        <!-- Required by Trusted Web Activity -->
+        <!-- TWA Delegation Service -->
         <service
             android:name="com.google.androidbrowserhelper.trusted.DelegationService"
-            android:exported="true">
+            android:exported="true"
+            tools:ignore="ExportedService">
 
             <intent-filter>
                 <action android:name="android.support.customtabs.trusted.TRUSTED_WEB_ACTIVITY_SERVICE" />
