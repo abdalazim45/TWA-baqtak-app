@@ -2,43 +2,27 @@ package com.baqtak.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-
+import androidx.core.net.toUri
 import com.google.androidbrowserhelper.trusted.TwaLauncher
 
-/**
- * Launcher Activity for Baqtak.
- *
- * Flow:
- * Android Splash
- *      ↓
- * Launch TWA
- *      ↓
- * baqtak.com
- *      ↓
- * Full Screen
- *
- * No onboarding screen is used.
- */
 class IntroActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        // Install the Android Splash Screen before super.onCreate().
+        // Android system splash.
+        // It remains visible only during the very first Android startup.
         installSplashScreen()
 
         super.onCreate(savedInstanceState)
 
-        // Launch the TWA immediately.
-        startMain()
+        // Start the TWA immediately.
+        // The TWA Splash configuration in AndroidManifest.xml
+        // handles the transition while Chrome/TWA is initializing.
+        startTwa()
     }
 
-    /**
-     * Launches Baqtak website using Trusted Web Activity.
-     */
-    private fun startMain() {
-
+    private fun startTwa() {
         val manifest = readManifestData(this)
 
         TwaLauncher(this).launch(
