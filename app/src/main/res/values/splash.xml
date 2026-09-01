@@ -6,20 +6,21 @@
         name="Theme.AnimatedSplash.MySplash"
         parent="Theme.SplashScreen">
 
-        <!-- خلفية بيضاء -->
         <item name="windowSplashScreenBackground">@color/white</item>
 
-        <!-- شعار باقتك -->
-        <item name="windowSplashScreenAnimatedIcon">@drawable/app_logo_onboarding</item>
+        <item name="windowSplashScreenAnimatedIcon">
+            @drawable/app_logo_onboarding
+        </item>
 
-        <!-- لا يوجد خلفية سوداء للشعار -->
-        <item name="windowSplashScreenIconBackgroundColor">@color/white</item>
+        <item name="windowSplashScreenIconBackgroundColor">
+            @color/white
+        </item>
 
-        <!-- انتقال سريع -->
         <item name="windowSplashScreenAnimationDuration">0</item>
 
-        <!-- بعد الـSplash -->
-        <item name="postSplashScreenTheme">@style/Theme.Appdadz</item>
+        <item name="postSplashScreenTheme">
+            @style/Theme.Appdadz
+        </item>
 
     </style>
 
