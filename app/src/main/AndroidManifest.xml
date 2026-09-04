@@ -22,15 +22,38 @@
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
 
+            <!-- فتح التطبيق من الأيقونة -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+            <!-- App Links: تأكيد البريد + إعادة تعيين كلمة المرور -->
+            <intent-filter android:autoVerify="true">
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="https"
+                    android:host="baqtak.com"
+                    android:pathPrefix="/verify-email" />
+
+                <data
+                    android:scheme="https"
+                    android:host="baqtak.com"
+                    android:pathPrefix="/reset-password" />
+
+            </intent-filter>
+
+            <!-- الرابط الافتراضي عند تشغيل التطبيق من الأيقونة -->
             <meta-data
                 android:name="android.support.customtabs.trusted.DEFAULT_URL"
                 android:value="https://baqtak.com/" />
 
+            <!-- إبقاء شريط الحالة وشريط التنقل ظاهرين -->
             <meta-data
                 android:name="android.support.customtabs.trusted.DISPLAY_MODE"
                 android:value="default" />
@@ -39,6 +62,7 @@
                 android:name="android.support.customtabs.trusted.SCREEN_ORIENTATION"
                 android:value="portrait" />
 
+            <!-- TWA Splash -->
             <meta-data
                 android:name="android.support.customtabs.trusted.SPLASH_IMAGE_DRAWABLE"
                 android:resource="@drawable/twa_splash" />
@@ -57,6 +81,7 @@
 
         </activity>
 
+        <!-- FileProvider الخاص بالـ TWA Splash -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -69,6 +94,7 @@
 
         </provider>
 
+        <!-- TWA Delegation Service -->
         <service
             android:name="com.google.androidbrowserhelper.trusted.DelegationService"
             android:exported="true"
