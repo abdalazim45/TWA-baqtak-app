@@ -47,11 +47,12 @@
                 android:name="android.support.customtabs.trusted.DEFAULT_URL"
                 android:value="https://baqtak.com/" />
 
-            <!-- إبقاء شريط الحالة وشريط التنقل ظاهرين -->
+            <!-- وضع العرض -->
             <meta-data
                 android:name="android.support.customtabs.trusted.DISPLAY_MODE"
                 android:value="default" />
 
+            <!-- اتجاه الشاشة -->
             <meta-data
                 android:name="android.support.customtabs.trusted.SCREEN_ORIENTATION"
                 android:value="portrait" />
@@ -88,11 +89,15 @@
 
         </provider>
 
-        <!-- TWA Delegation Service -->
+        <!-- TWA Delegation Service + Notification Icon -->
         <service
             android:name="com.google.androidbrowserhelper.trusted.DelegationService"
             android:exported="true"
             tools:ignore="ExportedService">
+
+            <meta-data
+                android:name="android.support.customtabs.trusted.SMALL_ICON"
+                android:resource="@drawable/ic_notification_icon" />
 
             <intent-filter>
                 <action android:name="android.support.customtabs.trusted.TRUSTED_WEB_ACTIVITY_SERVICE" />
