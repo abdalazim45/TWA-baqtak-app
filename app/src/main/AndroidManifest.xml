@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!-- App Links: تأكيد البريد + إعادة تعيين كلمة المرور -->
+            <!-- App Links: جميع روابط منصة باقتك -->
             <intent-filter android:autoVerify="true">
 
                 <action android:name="android.intent.action.VIEW" />
@@ -38,13 +38,7 @@
 
                 <data
                     android:scheme="https"
-                    android:host="baqtak.com"
-                    android:pathPrefix="/verify-email" />
-
-                <data
-                    android:scheme="https"
-                    android:host="baqtak.com"
-                    android:pathPrefix="/reset-password" />
+                    android:host="baqtak.com" />
 
             </intent-filter>
 
