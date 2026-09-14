@@ -50,7 +50,7 @@
             <!-- وضع العرض -->
             <meta-data
                 android:name="android.support.customtabs.trusted.DISPLAY_MODE"
-                android:value="default" />
+                android:value="immersive" />
 
             <!-- اتجاه الشاشة -->
             <meta-data
