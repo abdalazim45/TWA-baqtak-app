@@ -18,6 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Appdadz">
+        <activity
+    android:name="com.google.androidbrowserhelper.trusted.NotificationPermissionRequestActivity"
+    android:exported="false" />
 
         <!-- Baqtak TWA Launcher -->
         <activity
